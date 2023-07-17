@@ -69,7 +69,7 @@ let api = function Binance( options = {} ) {
         localAddress: false,
         family: false,
         log: function ( ...args ) {
-            console.log( Array.prototype.slice.call( args ) );
+            console.log( Array.prototype.slice.call( [new Date().toLocaleString(), ...args] ) );
         }
     };
     Binance.options = default_options;
@@ -5401,6 +5401,8 @@ let api = function Binance( options = {} ) {
                 }
 
                 apiRequest( url + 'v1/listenKey', {}, function ( error, response ) {
+                    Binance.options.log('Error listening to websocket server:', error);
+
                     Binance.options.listenFutureKey = response.listenKey;
                     setTimeout( function userDataKeepAlive() { // keepalive
                         try {
