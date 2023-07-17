@@ -5403,6 +5403,8 @@ let api = function Binance( options = {} ) {
                 apiRequest( url + 'v1/listenKey', {}, function ( error, response ) {
                     if (error) {
                         Binance.options.log('Error listening to websocket server:', error, response);
+                    } else {
+                        Binance.options.log('Listening to websocket server:', error, response);
                     }
 
                     Binance.options.listenFutureKey = response.listenKey;
