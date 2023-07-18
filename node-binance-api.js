@@ -5397,17 +5397,20 @@ let api = function Binance( options = {} ) {
                 const url = ( Binance.options.test ) ? fapiTest : fapi;
 
                 let reconnect = () => {
-                    if ( Binance.options.reconnect ) userFutureData( margin_call_callback, account_update_callback, order_update_callback, subscribed_callback )
+                    if ( Binance.options.reconnect ) {
+                        Binance.options.log('Reconnecting to websocket...');
+                        userFutureData( margin_call_callback, account_update_callback, order_update_callback, subscribed_callback )
+                    }
                 }
 
                 apiRequest( url + 'v1/listenKey', {}, function ( error, response ) {
                     if (error) {
                         Binance.options.log('Error getting listen key (userFutureData):', error, response);
                         if ( Binance.options.reconnect ) {
-                            Binance.options.log('Reconnecting to websocket...');
-                            setTimeout(reconnect, 1000);
+                            if (error.code !== 'ETIMEDOUT') {
+                                setTimeout(reconnect, 1000);
+                            }
                         }
-                        
                         return;
                     } else {
                         Binance.options.log('Successfully got listen key (userFutureData):', error, response);
