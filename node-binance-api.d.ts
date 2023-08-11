@@ -2,7 +2,7 @@
  * @author tripolskypetr
  * @see https://github.com/tripolskypetr
  */
-declare module "node-binance-api" {
+declare module "node-binance-api-2" {
 
     type _callback = (...args: any) => any;
 
