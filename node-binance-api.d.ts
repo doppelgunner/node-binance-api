@@ -4,11 +4,11 @@
  */
 declare module "node-binance-api-2" {
 
-    type _callback = (...args: any) => any;
+    export type _callback = (...args: any) => any;
 
-    type _symbol = string;
+    export type _symbol = string;
 
-    type _interval = keyof {
+    export type _interval = keyof {
         '1m': never;
         '3m': never;
         '5m': never;
@@ -26,7 +26,7 @@ declare module "node-binance-api-2" {
         '1M': never;
     };
 
-    interface IWebsockets {
+    export interface IWebsockets {
         /**
          * Userdata websockets function
          * @param {function} callback - the callback function
@@ -202,7 +202,7 @@ declare module "node-binance-api-2" {
         prevDay(...args: any): any;
     }
 
-    interface IConstructorArgs {
+    export interface IConstructorArgs {
         recvWindow: number;
         useServerTime: boolean;
         reconnect: boolean;
