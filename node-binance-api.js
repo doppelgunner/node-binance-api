@@ -5407,9 +5407,7 @@ let api = function Binance( options = {} ) {
                     if (error) {
                         Binance.options.log('Error getting listen key (userFutureData):', error, response);
                         if ( Binance.options.reconnect ) {
-                            if (error.code !== 'ETIMEDOUT') {
-                                setTimeout(reconnect, 1000);
-                            }
+                            reconnect();
                         }
                         return;
                     } else {
